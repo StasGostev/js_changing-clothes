@@ -2,7 +2,7 @@ const REMOVE_ITEM = "REMOVE_ITEM";
 const SELECT_ITEM = "SELECT_ITEM";
 const UPDATE_ITEM = "UPDATE_ITEM";
 
-let initialState = {
+const initialState = {
   clothers: [
     "Apron",
     "Belt",
@@ -48,7 +48,6 @@ function reducer(state = initialState, action) {
 
 function render() {
   const { clothers, selectedItem, inputValue } = store.getState();
-  console.log("selected item is : " + selectedItem);
   const list = document.getElementById("cupboard");
   list.innerHTML = "";
   for (let i = 0; i < clothers.length - 1; i++) {
