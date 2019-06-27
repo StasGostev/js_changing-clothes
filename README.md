@@ -21,3 +21,4 @@ Make an app that would allow to edit the names of the items:
 Create your project as a simple HTML page that uses Redux (link to [redux.min.js](redux.min.js)).
 
 First decide what will be stored in your state, what types of actions you will use and what exact data the actions will include, if any. Then implement a reducer. After all that is done you can move on to writing the rest of the code.
+- [demo] (https://stasgostev.github.io/js_changing-clothes/)
