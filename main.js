@@ -1,17 +1,39 @@
-const REMOVE_ITEM = "REMOVE_ITEM";
-const SELECT_ITEM = "SELECT_ITEM";
-const UPDATE_ITEM = "UPDATE_ITEM";
+const REMOVE_ITEM = 'REMOVE_ITEM';
+const SELECT_ITEM = 'SELECT_ITEM';
+const UPDATE_ITEM = 'UPDATE_ITEM';
+
+function removeItem(index) {
+  return {
+    type: REMOVE_ITEM,
+    index: index
+  };
+}
+
+function selectItem(index, itemValue) {
+  return {
+    type: SELECT_ITEM,
+    index: index,
+    inputValue: itemValue
+  };
+}
+
+function updateItem(value) {
+  return {
+    type: UPDATE_ITEM,
+    value: value
+  };
+}
 
 const initialState = {
   clothers: [
-    "Apron",
-    "Belt",
-    "Cardigan",
-    "Dress",
-    "Earrings",
-    "Fur coat",
-    "Gloves",
-    "Hat"
+    'Apron',
+    'Belt',
+    'Cardigan',
+    'Dress',
+    'Earrings',
+    'Fur coat',
+    'Gloves',
+    'Hat'
   ],
   selectedItem: null,
   inputValue: null
@@ -48,37 +70,27 @@ function reducer(state = initialState, action) {
 
 function render() {
   const { clothers, selectedItem, inputValue } = store.getState();
-  const list = document.getElementById("cupboard");
-  list.innerHTML = "";
+  const list = document.getElementById('cupboard');
+  list.innerHTML = '';
   for (let i = 0; i < clothers.length - 1; i++) {
     if (selectedItem !== i) {
-      const newLi = document.createElement("li");
-      const editBtn = document.createElement("button");
+      const newLi = document.createElement('li');
+      const editBtn = document.createElement('button');
       newLi.innerHTML = clothers[i];
-      editBtn.innerHTML = "Edit";
-      editBtn.addEventListener("click", () => {
-        store.dispatch({
-          type: SELECT_ITEM,
-          index: i,
-          inputValue: clothers[i]
-        });
+      editBtn.innerHTML = 'Edit';
+      editBtn.addEventListener('click', () => {
+        store.dispatch(selectItem(i, clothers[i]));
       });
       newLi.append(editBtn);
       list.append(newLi);
     } else {
-      const input = document.createElement("input");
-      input.addEventListener("keydown", event => {
-        if (event.key === "Enter") {
-          if (event.target.value.trim() === "") {
-            store.dispatch({
-              type: REMOVE_ITEM,
-              index: i
-            });
+      const input = document.createElement('input');
+      input.addEventListener('keydown', event => {
+        if (event.key === 'Enter') {
+          if (event.target.value.trim() === '') {
+            store.dispatch(removeItem(i));
           }
-          store.dispatch({
-            type: UPDATE_ITEM,
-            value: event.target.value
-          });
+          store.dispatch(updateItem(event.target.value));
         }
       });
       input.value = inputValue;
